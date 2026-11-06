@@ -1,0 +1,61 @@
+{
+  "name": "orbit",
+  "productName": "Orbit",
+  "version": "1.0.0",
+  "description": "Orbit — screen time tracker for Windows with an anime look. See where your time goes.",
+  "author": "Helder (Maidzinha)",
+  "license": "SEE LICENSE IN LICENSE.md",
+  "homepage": "https://github.com/Maidzinha/orbit",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Maidzinha/orbit.git"
+  },
+  "private": true,
+  "main": "src/main/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "icons": "node scripts/make-icons.js",
+    "screenshots": "electron . --screenshots=docs/images",
+    "dist": "npm test && npm run icons && electron-builder --win --x64 --publish never"
+  },
+  "build": {
+    "appId": "com.maidzinha.orbit",
+    "productName": "Orbit",
+    "copyright": "© 2026 Helder (Maidzinha)",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "LICENSE.md",
+      "package.json"
+    ],
+    "win": {
+      "icon": "build/icon.png",
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Orbit-${version}-setup-win-x64.${ext}",
+      "license": "LICENSE.md"
+    },
+    "portable": {
+      "artifactName": "Orbit-${version}-portable-win-x64.${ext}"
+    }
+  },
+  "dependencies": {
+    "koffi": "^3.3.7"
+  },
+  "devDependencies": {
+    "electron": "^45.2.3",
+    "electron-builder": "^26.18.0"
+  }
+}
